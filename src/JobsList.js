@@ -1,11 +1,11 @@
 import React from "react";
 
-function List() {
+function JobsList() {
   return (
     <div>
-      List
+      JobsList
     </div>
   )
 }
 
-export default List;
+export default JobsList;
