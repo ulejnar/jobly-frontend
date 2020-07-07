@@ -1,11 +1,11 @@
 import React from "react";
 
-function Homepage() {
+function List() {
   return (
     <div>
-      Homepage
+      List
     </div>
   )
 }
 
-export default Homepage;
+export default List;
