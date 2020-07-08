@@ -1,13 +1,13 @@
 import React from 'react';
 import { useState } from 'react';
-
-function SearchForm({searchCompanies}) {
+// change the props method as search instead of two seperate 
+function SearchForm({search}) {
   const INITIALFORMSTATE = {search: ""};
   const [formData, setFormData] = useState(INITIALFORMSTATE);
 
   const handleSubmit = evt => {
     evt.preventDefault();
-    searchCompanies(formData);
+    search(formData);
     setFormData(INITIALFORMSTATE);
     
   }

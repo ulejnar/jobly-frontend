@@ -14,7 +14,6 @@ class JoblyApi {
     const data = (verb === "get")
       ? { params: { _token, ...params } } // GET
       : { _token, ...params };            // POST, PATCH
-    // const data = undefined;
 
 
     const req = axios[verb](`${BASE_URL}/${endpoint}`, data);
@@ -35,9 +34,21 @@ class JoblyApi {
     return res.company;
   }
 
-  static async getCompanies(query={}){ 
+  static async getCompanies(query = {}) {
     let res = await this.request('companies', query);
     return res.companies;
+  }
+
+  static async getJobs(query = {}) {
+    let res = await this.request('jobs', query);
+    return res.jobs;
+  }
+
+  // Auth API routes 
+  
+  static async login(data) {
+    let res = await this.request('login', data, 'post');
+    return res.token;
   }
 
 }

@@ -14,7 +14,6 @@ function CompaniesList() {
   useEffect(function handleFetchCompanies() {
     async function fetchCompanies () {
       const companies = await JoblyApi.getCompanies();
-      console.log(companies);
       setListOfCompanies(companies);
     }
     fetchCompanies();
@@ -24,9 +23,9 @@ function CompaniesList() {
   return (
     <div>
       CompaniesList
-      <SearchForm searchCompanies ={searchCompanies}/>
+      <SearchForm search={searchCompanies}/>
       <ul>
-      {listOfCompanies.map( company => <CompanyCard company={company} /> )}
+      {listOfCompanies.map( company => <CompanyCard key={company.handle} company={company} /> )}
       </ul>
     </div>
   )
