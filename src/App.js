@@ -13,6 +13,8 @@ function App() {
   const [isLoggedIn, setLoggedIn] = useState(true);
   const logOutUser = () => setLoggedIn(false);
 
+  // localStorage.setItem("_token", "blabla");
+
   return (
     <div className="App">
       <BrowserRouter>

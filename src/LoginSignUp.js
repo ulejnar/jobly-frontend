@@ -9,17 +9,22 @@ function LogInSignUp() {
 
   const loginUser = async (data) => {
     const token = await JoblyApi.login(data);
-    console.log(token);
+    localStorage.setItem("_token", token);
+    console.log("Login user token", localStorage);
   };
 
-
+  const signUpUser = async (data) => {
+    const token = await JoblyApi.signup(data);
+    localStorage.setItem("_token", token);
+    console.log("Sign up user token", localStorage);
+  }
 
   return (
     <div>
       Log in , sign up
       <button disabled={isLoginForm} onClick={() => setIsLoginForm(true)}>Login</button>
       <button disabled={!isLoginForm} onClick={() => setIsLoginForm(false)}>SignUp</button>
-      {isLoginForm ? <LoginForm login={loginUser} /> : <SignUpForm />}
+      {isLoginForm ? <LoginForm login={loginUser} /> : <SignUpForm signUp={signUpUser}/>}
 
     </div>
   )
