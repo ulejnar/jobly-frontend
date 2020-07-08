@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import SearchForm from "./SearchForm";
 import JobCard from "./JobCard";
 import JoblyAPI from "./JoblyApi";
+import { Redirect } from "react-router-dom";
 
 
-function JobsList() {
+function JobsList({ isLoggedIn }) {
   // state for an array of jobs 
   const [listOfJobs, setListOfJobs] = useState([]);
 
@@ -18,11 +19,22 @@ function JobsList() {
   useEffect(function handleFetchJobs() {
     // make an axios request to get all jobs
     async function fetchJobs() {
-      const jobs = await JoblyAPI.getJobs();
-      setListOfJobs(jobs);
+      try {
+        const jobs = await JoblyAPI.getJobs();
+        setListOfJobs(jobs);
+      } catch (err) {
+        console.log("isloggedin inside the catch block??, ", isLoggedIn);
+        console.log(err);
+        return <Redirect to="/login" />;
+      }
     }
     fetchJobs();
-  },[]);
+  },[isLoggedIn]);
+
+  console.log("isloggedin??, ", isLoggedIn);
+  // if (userData) {
+  //   return <Redirect to="/login"/>;
+  // }
 
   return (
     <div>
