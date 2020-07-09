@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import JoblyApi from "./JoblyApi";
 import CompanyCard from './CompanyCard';
 import SearchForm from './SearchForm';
+import { useHistory } from "react-router-dom";
 
-function CompaniesList() {
+function CompaniesList({ isLoggedIn }) {
   const [listOfCompanies, setListOfCompanies] = useState([]);
+  const history = useHistory();
 
   async function searchCompanies(data) {
     const companiesFound = await JoblyApi.getCompanies(data);
@@ -13,11 +15,15 @@ function CompaniesList() {
 
   useEffect(function handleFetchCompanies() {
     async function fetchCompanies () {
-      const companies = await JoblyApi.getCompanies();
-      setListOfCompanies(companies);
+      try {
+        const companies = await JoblyApi.getCompanies();
+        setListOfCompanies(companies);
+      } catch (err) {
+        return history.push("/login");
+      }
     }
     fetchCompanies();
-  }, []);
+  }, [history]);
 
 
   return (

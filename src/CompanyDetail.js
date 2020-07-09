@@ -1,21 +1,26 @@
 import React, { useEffect, useState } from "react";
 import JoblyApi from './JoblyApi';
-import { useParams } from 'react-router-dom';
-import JobsList from "./JobsList";
+import { useParams, useHistory } from 'react-router-dom';
 import JobCard from "./JobCard";
 
 function CompanyDetails() {
   const { handle } = useParams();
   const [companyData, setCompanyData] = useState({});
+  const history = useHistory();
 
   // axios call to getCompany()
   useEffect(function handleGetCompany() {
     async function getCompany() {
-      const company = await JoblyApi.getCompany(handle);
-      setCompanyData(company);
+      try {
+        const company = await JoblyApi.getCompany(handle);
+        setCompanyData(company);
+      } catch (err) {
+        // add an alert to tell user they are unauthorized to access. 
+        return history.push("/login");
+      }
     }
     getCompany();
-  }, [handle]);
+  }, [handle, history]);
 
   return (
     <div>

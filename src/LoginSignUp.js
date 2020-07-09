@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import JoblyApi from "./JoblyApi";
 import LoginForm from "./LoginForm";
 import SignUpForm from "./SignUpForm";
-import { useHistory } from "react-router-dom"
+import { useHistory } from "react-router-dom";
 
 function LogInSignUp({ logIn }) {
   // State that toggles between login and sign up form

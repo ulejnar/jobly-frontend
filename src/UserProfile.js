@@ -5,7 +5,7 @@ function UserProfile() {
     <div>
       User profile
     </div>
-  )
+  );
 }
 
 export default UserProfile;
