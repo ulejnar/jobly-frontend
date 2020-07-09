@@ -17,7 +17,7 @@ function LogInSignUp({ logIn }) {
     try {
       const token = await JoblyApi.login(data);
       localStorage.setItem("_token", token);
-      logIn();
+      logIn(true);
       history.push("/jobs");
     } catch (err) {
       setListOfErrors(err);
@@ -30,7 +30,7 @@ function LogInSignUp({ logIn }) {
     try {
       const token = await JoblyApi.signup(data);
       localStorage.setItem("_token", token);
-      logIn();
+      logIn(true);
       history.push("/jobs");
     } catch (err) {
       setListOfErrors(err);

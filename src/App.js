@@ -23,7 +23,7 @@ function App() {
       
       // if _token doesn't exist in localStorage, then return early.
       if (_token === null) {
-        return false;
+        setLoggedIn(false);
       } 
       
       try {
@@ -37,7 +37,7 @@ function App() {
         setLoggedIn(true);
       } catch (err) {
         console.log(err);
-        return false;
+        setLoggedIn(false);
       }
     }
     tokenValidation();
@@ -49,8 +49,6 @@ function App() {
     setLoggedIn(false);
   };
 
-  const logInUser = () => {setLoggedIn(true)};
-
   return (
     <div className="App">
       <BrowserRouter>
@@ -59,8 +57,8 @@ function App() {
           <Route exact path="/companies/:handle"><CompanyDetail /></Route>
           <Route exact path="/companies"><CompaniesList isLoggedIn={isLoggedIn}/></Route>
           <Route exact path="/jobs"><JobsList isLoggedIn={isLoggedIn}/></Route>
-          <Route exact path="/profile"><UserProfile userData={userData}/></Route>
-          <Route exact path="/login"><LoginSignUp logIn={logInUser} /></Route>
+          <Route exact path="/profile"><UserProfile userData={userData} changeUserData={setUserData} /></Route>
+          <Route exact path="/login"><LoginSignUp logIn={setLoggedIn} /></Route>
           <Route exact path="/"><Homepage isLoggedIn={isLoggedIn} /></Route>
         </Switch>
       </BrowserRouter>
