@@ -1,19 +1,26 @@
 import React, { useState, useEffect } from "react";
 import SearchForm from "./SearchForm";
 import JobCard from "./JobCard";
-import JoblyAPI from "./JoblyApi";
+import JoblyApi from "./JoblyApi";
 import { useHistory } from "react-router-dom";
 
 
-function JobsList({ isLoggedIn }) {
+function JobsList({ userData }) {
   // state for an array of jobs 
   const [listOfJobs, setListOfJobs] = useState([]);
+  const [message, setMessage] = useState("");
   const history = useHistory();
 
-  // searchJobs method 
+  // searchJobs method to get a filtered list of jobs
   async function searchJobs(data) {
-    const jobsFound = await JoblyAPI.getJobs(data);
+    const jobsFound = await JoblyApi.getJobs(data);
     setListOfJobs(jobsFound);
+  }
+
+  // applyJob makes a post to apply to a job, sets a message returned from api.
+  async function applyJob(jobId) {
+    const messageRes = await JoblyApi.applyToJob(jobId);
+    setMessage(messageRes);
   }
 
   // use effect, use upon mount
@@ -21,7 +28,7 @@ function JobsList({ isLoggedIn }) {
     // make an axios request to get all jobs
     async function fetchJobs() {
       try {
-        const jobs = await JoblyAPI.getJobs();
+        const jobs = await JoblyApi.getJobs();
         setListOfJobs(jobs);
       } catch (err) {
         return history.push("/login");
@@ -30,14 +37,16 @@ function JobsList({ isLoggedIn }) {
     fetchJobs();
   }, [history]);
 
-
   return (
     <div>
       Jobs List
+      {message !== "" ? <p style={{ color: "green" }}>{message}</p> : null}
       <SearchForm search={searchJobs} />
-      {listOfJobs.map(job => <JobCard key={job.id} job={job} />)}
+      {listOfJobs.map((job) => {
+        return <JobCard key={job.id} job={job} applyJob={applyJob} />
+      })}
     </div>
-  )
+  );
 }
 
 export default JobsList;

@@ -8,6 +8,11 @@ function CompanyDetails() {
   const [companyData, setCompanyData] = useState({});
   const history = useHistory();
 
+  async function applyJob(jobId) {
+    const message = await JoblyApi.applyToJob(jobId);
+    console.log(message);
+  }
+
   // axios call to getCompany()
   useEffect(function handleGetCompany() {
     async function getCompany() {
@@ -26,7 +31,7 @@ function CompanyDetails() {
     <div>
       <h3>{companyData.name}</h3>
       <p>{companyData.description}</p>
-      {companyData.jobs ? companyData.jobs.map(job => <JobCard key={job.id} job={job} />) : null}
+      {companyData.jobs ? companyData.jobs.map(job => <JobCard key={job.id} job={job} applyJob={applyJob}/>) : null}
     </div>
   )
 }

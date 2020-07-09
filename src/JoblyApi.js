@@ -41,8 +41,6 @@ class JoblyApi {
     let res = await this.request('jobs', query);
     return res.jobs;
   }
-
-  // Auth API routes 
   
   static async login(data) {
     let res = await this.request('login', data, 'post');
@@ -62,8 +60,13 @@ class JoblyApi {
   static async updateUser(username, userdata) {
     let res = await this.request(`users/${username}`, userdata, 'patch');
     return res.user;
-
   }
+
+  static async applyToJob(jobId) {
+    let res = await this.request(`jobs/${jobId}/apply`, {} ,'post');
+    return res.message;
+  }
+
 
 }
 
