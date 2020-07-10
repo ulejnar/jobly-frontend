@@ -29,8 +29,8 @@ function UserProfile({ userData, changeUserData, isLoggedIn }) {
   //show form only if some property in the userdata exists
   return (
     <div>
-      {userData.first_name ? <UserProfileForm userData={userData} updateUser={updateCurrentUser}></UserProfileForm> : "loading"}
-      {listOfErrors !== [] ? listOfErrors.map((err) => <p>{err}</p>) : null}
+      {userData.first_name ? <UserProfileForm userData={userData} updateUser={updateCurrentUser} />: "loading"}
+      {listOfErrors.length !== 0 && listOfErrors.map((err) => <p>{err}</p>)}
       {successUpdateMsg !== "" && successUpdateMsg}
     </div>
   )

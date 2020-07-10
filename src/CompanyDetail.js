@@ -20,7 +20,7 @@ function CompanyDetails() {
         const company = await JoblyApi.getCompany(handle);
         setCompanyData(company);
       } catch (err) {
-        // add an alert to tell user they are unauthorized to access. 
+        //TODO: add an alert to tell user they are unauthorized to access. 
         return history.push("/login");
       }
     }
