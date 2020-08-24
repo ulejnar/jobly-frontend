@@ -61,17 +61,19 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div>
       <BrowserRouter>
         <NavBar isLoggedIn={isLoggedIn} logOutUser={logOutUser} />
         <AppliedJobsContext.Provider value={{ userJobs: userData.jobs || [], applyForJob }}>
           <Switch>
-            <Route exact path="/companies/:handle"><CompanyDetail userData={userData} changeUserData={setUserData} /></Route>
-            <Route exact path="/jobs"><JobsList isLoggedIn={isLoggedIn} changeUserData={setUserData} /></Route>
-            <Route exact path="/companies"><CompaniesList isLoggedIn={isLoggedIn} /></Route>
-            <Route exact path="/profile"><UserProfile userData={userData} changeUserData={setUserData} isLoggedIn={isLoggedIn} /></Route>
-            <Route exact path="/login"><LoginSignUp isLoggedIn={isLoggedIn} logIn={setLoggedIn} /></Route>
-            <Route exact path="/"><Homepage isLoggedIn={isLoggedIn} /></Route>
+            <div className="container">
+              <Route exact path="/companies/:handle"><CompanyDetail userData={userData} changeUserData={setUserData} /></Route>
+              <Route exact path="/jobs"><JobsList isLoggedIn={isLoggedIn} changeUserData={setUserData} /></Route>
+              <Route exact path="/companies"><CompaniesList isLoggedIn={isLoggedIn} /></Route>
+              <Route exact path="/profile"><UserProfile userData={userData} changeUserData={setUserData} isLoggedIn={isLoggedIn} /></Route>
+              <Route exact path="/login"><LoginSignUp isLoggedIn={isLoggedIn} logIn={setLoggedIn} /></Route>
+              <Route exact path="/"><Homepage isLoggedIn={isLoggedIn} /></Route>
+            </div>
           </Switch>
         </AppliedJobsContext.Provider>
       </BrowserRouter>

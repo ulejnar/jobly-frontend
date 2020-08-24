@@ -23,14 +23,32 @@ function UserProfileForm({ userData, updateUser }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <p> Username </p>
-      <p> {userData.username} </p>
-      <input name="first_name" value={formData.first_name} placeholder="First name" onChange={handleChange} />
-      <input name="last_name" value={formData.last_name} placeholder="Last name" onChange={handleChange} />
-      <input name="email" value={formData.email} placeholder="Email" onChange={handleChange} />
-      <input name="photo_url" value={formData.photo_url} placeholder="Photo URL" onChange={handleChange} />
-      <input name="password" value={formData.password} placeholder="Re-enter password" type="password" onChange={handleChange} />
-      <button>SaveChanges</button>
+      <h1>Edit profile</h1>
+      <div class="form-group">
+        <label htmlFor="username">Username</label>
+        <input name="username" class="form-control" value={userData.username} />
+      </div>
+      <div class="form-group">
+        <label htmlFor="first_name">First name</label>
+        <input name="first_name" class="form-control" value={formData.first_name} placeholder="First name" onChange={handleChange} />
+      </div> 
+      <div class="form-group">
+        <label htmlFor="last_name">Last name</label>
+        <input name="last_name" class="form-control" value={formData.last_name} placeholder="Last name" onChange={handleChange} />
+      </div>
+      <div class="form-group">
+        <label htmlFor="email">Email</label>
+        <input name="email" class="form-control" value={formData.email} placeholder="Email" onChange={handleChange} />
+      </div>
+      <div class="form-group">
+        <label htmlFor="photo_url">Photo URL</label>
+        <input name="photo_url" class="form-control" value={formData.photo_url} placeholder="Photo URL" onChange={handleChange} />
+      </div>
+      <div class="form-group">
+        <label htmlFor="password">Password</label>
+        <input name="password" class="form-control" value={formData.password} placeholder="Re-enter password" type="password" onChange={handleChange} />
+        </div>
+        <button class="btn btn-primary">SaveChanges</button>
     </form>
   )
 

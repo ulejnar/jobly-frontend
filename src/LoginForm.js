@@ -18,9 +18,16 @@ function LoginForm({ login }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input name="username" value={formData.username} placeholder="Username" onChange={handleChange} />
-      <input name="password" value={formData.password} placeholder="Password" onChange={handleChange} />
-      <button>Login</button>
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input name="username" className="form-control" value={formData.username} onChange={handleChange} />
+      </div>
+
+      <div className="form-group">
+        <label for="password">Password</label>
+        <input name="password" type="password" className="form-control" data-toggle="password" value={formData.password} onChange={handleChange} />
+      </div>
+      <button type="submit" class="btn btn-primary">Login</button>
     </form>
   )
 }

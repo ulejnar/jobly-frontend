@@ -5,7 +5,9 @@ const BASE_URL = "https://jobly-rithm16.herokuapp.com"
 
 class JoblyApi {
   static async request(endpoint, params = {}, verb = "get") {
-    console.debug("API Call:", endpoint, params, verb);
+    console.log("API Call:", endpoint, params, verb);
+
+    // console.debug("API Call:", endpoint, params, verb);
 
     const _token = localStorage.getItem('_token');
     console.log("_token", _token);

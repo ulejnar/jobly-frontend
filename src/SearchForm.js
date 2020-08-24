@@ -19,14 +19,17 @@ function SearchForm({search}) {
 
   return (
     <form onSubmit={handleSubmit}>
+      <div class="form-group">
       <label htmlFor="search">Search term:</label>
       <input
+        class="form-control w-50"
         id="search"
         name="search"
         value={formData.search}
         onChange={handleChange}
       />
-      <button>Submit</button>
+      </div>
+      <button class="btn btn-primary " style={{marginBottom:"2rem"}}>Submit</button>
     </form>
   );
 }

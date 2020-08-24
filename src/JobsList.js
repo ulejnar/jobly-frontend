@@ -39,7 +39,7 @@ function JobsList({ userData }) {
 
   return (
     <div>
-      Jobs List
+      <h1>Job listings</h1>
       {message !== "" ? <p style={{ color: "green" }}>{message}</p> : null}
       <SearchForm search={searchJobs} />
       {listOfJobs.map((job) => {

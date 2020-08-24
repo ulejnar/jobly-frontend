@@ -49,8 +49,8 @@ function LogInSignUp({ logIn, isLoggedIn }) {
   return (
     <div>
       <h1>Log in , sign up</h1>
-      <button disabled={isLoginForm} onClick={() => setIsLoginForm(true)}>Login</button>
-      <button disabled={!isLoginForm} onClick={() => setIsLoginForm(false)}>SignUp</button>
+      <button class="btn btn-primary" disabled={isLoginForm} onClick={() => setIsLoginForm(true)}>Login</button>
+      <button class="btn btn-primary" style={{margin:"1rem"}} disabled={!isLoginForm} onClick={() => setIsLoginForm(false)}>SignUp</button>
       {isLoginForm ? <LoginForm login={loginUser} /> : <SignUpForm signUp={signUpUser} />}
       {listOfErrors.map((err) => <p key={err}>{err}</p>)}
     </div>

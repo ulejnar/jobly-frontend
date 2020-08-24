@@ -1,4 +1,5 @@
 import React from "react";
+import './NavBar.css'
 import { NavLink } from "react-router-dom";
 
 function NavBar({ isLoggedIn, logOutUser }) {
@@ -13,9 +14,15 @@ function NavBar({ isLoggedIn, logOutUser }) {
   );
 
   return (
-    <nav className="NavBar">
-      <NavLink exact to="/">Jobly</NavLink>
+    <nav className="navbar navbar-expand-lg navbar-light bg-light mb-5">
+      <NavLink className="navbar-brand" exact to="/">Jobly</NavLink>
+      <ul className="navbar-nav ml-auto">
+          <li className="nav-item">
+
       {isLoggedIn ? loggedInNavBar : <NavLink exact to="/login" >Login</NavLink>}
+      </li>
+            </ul>
+
     </nav>
   );
 }

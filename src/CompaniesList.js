@@ -28,7 +28,7 @@ function CompaniesList({ isLoggedIn }) {
 
   return (
     <div>
-      CompaniesList
+      <h1>CompaniesList</h1>
       <SearchForm search={searchCompanies}/>
       <ul>
       {listOfCompanies.map( company => <CompanyCard key={company.handle} company={company} /> )}
