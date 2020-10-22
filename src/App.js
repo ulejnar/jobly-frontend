@@ -11,10 +11,15 @@ import JoblyApi from './JoblyApi';
 import AppliedJobsContext from './AppliedJobsContext';
 import "./App.css";
 
+
+
 // apply for job fxn that setUserData( old jobs + new applied job) 
 function App() {
+  
   const [isLoggedIn, setLoggedIn] = useState(false);
   const [userData, setUserData] = useState({});
+
+  
 
   // useEffect to check if the token is still in localStorage (the user hasnt been logged out).
   useEffect(function checkIfTokenExists() {
@@ -23,6 +28,7 @@ function App() {
     // otherwise, continue to line 37 to `setLoggedIn(true)`
     async function tokenValidation() {
       const _token = localStorage.getItem("_token");
+      console.log("I got token from local storage")
 
       // if _token doesn't exist in localStorage, then setLoggedIn to false.
       if (_token === null) {
@@ -42,15 +48,18 @@ function App() {
       } catch (err) {
         console.log(err);
         setLoggedIn(false);
+        
+        console.log("UserData", userData)
       }
     }
     tokenValidation();
-  }, []);
+  }, [isLoggedIn]);
 
   // logOutUser: clears the token from localStorage, setLoggedIn to false, 
   const logOutUser = () => {
     localStorage.clear();
     setLoggedIn(false);
+    setUserData({})
   };
 
   const applyForJob = (newJob) => {
@@ -69,7 +78,7 @@ function App() {
             <div className="container">
               <Route exact path="/companies/:handle"><CompanyDetail userData={userData} changeUserData={setUserData} /></Route>
               <Route exact path="/jobs"><JobsList isLoggedIn={isLoggedIn} changeUserData={setUserData} /></Route>
-              <Route exact path="/companies"><CompaniesList isLoggedIn={isLoggedIn} /></Route>
+              <Route exact path="/companies"><CompaniesList isLoggedIn={isLoggedIn}/></Route>
               <Route exact path="/profile"><UserProfile userData={userData} changeUserData={setUserData} isLoggedIn={isLoggedIn} /></Route>
               <Route exact path="/login"><LoginSignUp isLoggedIn={isLoggedIn} logIn={setLoggedIn} /></Route>
               <Route exact path="/"><Homepage isLoggedIn={isLoggedIn} /></Route>

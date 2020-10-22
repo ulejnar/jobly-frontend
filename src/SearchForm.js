@@ -1,13 +1,14 @@
 import React from 'react';
 import { useState } from 'react';
 // change the props method as search instead of two seperate 
-function SearchForm({search}) {
+function SearchForm({setSearchTerm, handlePageChange}) {
   const INITIALFORMSTATE = {search: ""};
   const [formData, setFormData] = useState(INITIALFORMSTATE);
 
   const handleSubmit = evt => {
     evt.preventDefault();
-    search(formData);
+    setSearchTerm(formData);
+    handlePageChange("1", formData)
     setFormData(INITIALFORMSTATE);
     
   }
@@ -19,17 +20,17 @@ function SearchForm({search}) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div class="form-group">
+      <div className="form-group">
       <label htmlFor="search">Search term:</label>
       <input
-        class="form-control w-50"
+        className="form-control w-50"
         id="search"
         name="search"
         value={formData.search}
         onChange={handleChange}
       />
       </div>
-      <button class="btn btn-primary " style={{marginBottom:"2rem"}}>Submit</button>
+      <button className="btn btn-primary " style={{marginBottom:"2rem"}}>Submit</button>
     </form>
   );
 }
