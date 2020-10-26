@@ -7,13 +7,16 @@ function NavBar({ isLoggedIn, logOutUser }) {
   const loggedInNavBar = (
     <span>
       <NavLink exact to="/companies">
-        Companies
+        Find Companies
       </NavLink>
       <NavLink exact to="/jobs">
-        Jobs
+        Find Jobs
       </NavLink>
       <NavLink exact to="/profile">
         Profile
+      </NavLink>
+      <NavLink exact to="/myJobs">
+        My Jobs
       </NavLink>
       <NavLink exact to="/" onClick={logOutUser}>
         Logout

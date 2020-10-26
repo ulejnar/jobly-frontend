@@ -8,6 +8,7 @@ import CompaniesList from './CompaniesList';
 import UserProfile from './UserProfile';
 import LoginSignUp from './LoginSignUp';
 import JoblyApi from './JoblyApi';
+import MyJobsList from './MyJobsList';
 import AppliedJobsContext from './AppliedJobsContext';
 import "./App.css";
 
@@ -79,6 +80,7 @@ function App() {
               <Route exact path="/companies/:handle"><CompanyDetail userData={userData} changeUserData={setUserData} /></Route>
               <Route exact path="/jobs"><JobsList isLoggedIn={isLoggedIn} changeUserData={setUserData} /></Route>
               <Route exact path="/companies"><CompaniesList isLoggedIn={isLoggedIn}/></Route>
+              <Route exact path="/myJobs"><MyJobsList isLoggedIn={isLoggedIn} userData={userData}/></Route>
               <Route exact path="/profile"><UserProfile userData={userData} changeUserData={setUserData} isLoggedIn={isLoggedIn} /></Route>
               <Route exact path="/login"><LoginSignUp isLoggedIn={isLoggedIn} logIn={setLoggedIn} /></Route>
               <Route exact path="/"><Homepage isLoggedIn={isLoggedIn} /></Route>
