@@ -1,45 +1,36 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import JobCard from "./JobCard";
 import Paginate from "./Paginate";
+import AppliedJobsContext from "./AppliedJobsContext";
 import { useHistory } from "react-router-dom";
 
 
-function MyJobsList({ userData }) {
 
-  const [listOfJobs, setListOfJobs] = useState([]);
+function MyJobsList({}) {
+
+ // const [listOfJobs, setListOfJobs] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const history = useHistory();
+  const { userJobs} = useContext(AppliedJobsContext);
   let pageRange =10;
+  const start = (currentPage-1)*pageRange;
+  const appliedJobsLength = userJobs.filter(job => job.state==='applied').length;
+  const appliedJobs = userJobs.filter(job => job.state==='applied').slice(start, start+pageRange);
+
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
-    const start = (pageNumber-1)*pageRange;
-    const jobsFound = userData.jobs.slice(start, start+pageRange);
-    setListOfJobs(jobsFound);
   };
-
-  useEffect(function handleFetchAppliedJobs() {
-   function fetchAppliedJobs() {
-      try {
-        const jobs = userData.jobs.slice(0,pageRange);
-        setListOfJobs(jobs);
-      } catch (err) {
-        return history.push("/login");
-      }
-    }
-    fetchAppliedJobs();
-  }, [history]);
 
   
   return (
     <div>
       <h1>Apllied jobs</h1>
-      {listOfJobs.map((job) => {
+      {appliedJobs.map((job) => {
         return <JobCard key={job.id} job={job}  />
       })}
        <Paginate
         currentPage={currentPage}
-        totalRecords={userData.jobs.length}
+        totalRecords={appliedJobsLength}
         handlePageChange={handlePageChange}
       />
     </div>

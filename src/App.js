@@ -63,10 +63,27 @@ function App() {
     setUserData({})
   };
 
-  const applyForJob = (newJob) => {
+  const applyForJob = (job) => {
     setUserData((currData) => {
-      let newJobsArray = [...currData.jobs, newJob];
-      return { ...currData, jobs: newJobsArray };
+      if(job.state === "application withdrawn"){
+        let tempJobsArray = [...currData.jobs];
+        let foundJob = tempJobsArray.find(j => +j.id===+job.id)
+        foundJob.state = "applied";
+        return { ...currData, jobs: tempJobsArray };
+      } else{
+        let newJobsArray = [...currData.jobs, job];
+        return { ...currData, jobs: newJobsArray };
+      }
+    })
+  };
+  const unapplyForJob = (jobToBeDeleted) => {
+    setUserData((currData) => {
+      let tempJobsArray = [...currData.jobs];
+      let updatedArray = tempJobsArray.filter(job => job !== jobToBeDeleted);
+      //let jobIndex = tempJobsArray.findIndex(job=>job===jobToBeDeleted);
+      //console.log("indexFound", jobIndex);
+      //tempJobsArray.delete[jobIndex];
+      return { ...currData, jobs: updatedArray };
     })
   };
 
@@ -74,7 +91,7 @@ function App() {
     <div>
       <BrowserRouter>
         <NavBar isLoggedIn={isLoggedIn} logOutUser={logOutUser} />
-        <AppliedJobsContext.Provider value={{ userJobs: userData.jobs || [], applyForJob }}>
+        <AppliedJobsContext.Provider value={{ userJobs: userData.jobs || [], applyForJob,unapplyForJob }}>
           <Switch>
             <div className="container">
               <Route exact path="/companies/:handle"><CompanyDetail userData={userData} changeUserData={setUserData} /></Route>
