@@ -75,25 +75,6 @@ function App() {
         foundJob.state = "applied";
         return { ...currData, jobs: tempJobsArray }
       }
-
-  // const applyForJob = (job) => {
-  //   setUserData((currData) => {
-  //     if(job.state === "application withdrawn"){
-  //       let tempJobsArray = [...currData.jobs];
-  //       let foundJob = tempJobsArray.find(j => +j.id===+job.id)
-  //       foundJob.state = "applied";
-  //       console.log("jobsArray", tempJobsArray);
-  //       let newUserData = { ...currData, jobs: tempJobsArray }
-  //       console.log("newUserData",newUserData);
-  //       return newUserData;
-  //     } else{
-  //       job.state="applied"
-  //       let newJobsArray = [...currData.jobs, job];
-  //       console.log("jobsArray", newJobsArray);
-  //       let newUserData ={ ...currData, jobs: newJobsArray }
-  //       console.log("newUserData",newUserData);
-  //       return newUserData;
-  //     }
     })
   };
   const unapplyForJob = (jobToBeDeleted) => {
