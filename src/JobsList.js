@@ -9,7 +9,6 @@ import Paginate from "./Paginate";
 function JobsList({ userData }) {
   // state for an array of jobs 
   const [listOfJobs, setListOfJobs] = useState([]);
-  const [message, setMessage] = useState("");
   const history = useHistory();
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState({});
@@ -24,8 +23,10 @@ function JobsList({ userData }) {
 
   //applyJob makes a post to apply to a job, sets a message returned from api.
   async function applyJob(jobId) {
-    const messageRes = await JoblyApi.applyToJob(jobId);
-    setMessage(messageRes);
+    await JoblyApi.applyToJob(jobId);
+  }
+  async function unapplyJob(jobId) {
+    await JoblyApi.unapplyToJob(jobId);
   }
 
   const handlePageChange = async (pageNumber, search) => {
@@ -59,10 +60,10 @@ function JobsList({ userData }) {
   return (
     <div>
       <h1>Job listings</h1>
-      {message !== "" ? <p style={{ color: "green" }}>{message}</p> : null}
+    
       <SearchForm setSearchTerm={setSearchTerm} handlePageChange={handlePageChange}/>
       {listOfJobs.map((job) => {
-        return <JobCard key={job.id} job={job} applyJob={applyJob} />
+        return <JobCard key={job.id} job={job} applyJob={applyJob} unapplyJob={unapplyJob}/>
       })}
       <Paginate
         currentPage={currentPage}

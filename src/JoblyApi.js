@@ -16,7 +16,6 @@ class JoblyApi {
         : { _token, ...params }; // POST, PATCH
 
     const req = axios[verb](`${BASE_URL}/${endpoint}`, data);
-    console.log("request", req);
 
     try {
       return (await req).data;
@@ -82,6 +81,10 @@ class JoblyApi {
 
   static async applyToJob(jobId) {
     let res = await this.request(`jobs/${jobId}/apply`, {}, "post");
+    return res.message;
+  }
+  static async unapplyToJob(jobId, data) {
+    let res = await this.request(`jobs/${jobId}/unapply`,data, "patch");
     return res.message;
   }
 }

@@ -2,7 +2,7 @@ import React from "react";
 import Pagination from "react-js-pagination";
 
 function Paginate({ currentPage, totalRecords, handlePageChange }) {
-  console.log("currentPage", currentPage)
+  //console.log("currentPage", currentPage)
   // total records per page to display
   const recordPerPage = 10;
 
